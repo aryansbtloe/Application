@@ -1,0 +1,71 @@
+PODS:
+  - ActionSheetPicker-3.0 (2.2.0)
+  - AFNetworking (3.1.0):
+    - AFNetworking/NSURLSession (= 3.1.0)
+    - AFNetworking/Reachability (= 3.1.0)
+    - AFNetworking/Security (= 3.1.0)
+    - AFNetworking/Serialization (= 3.1.0)
+    - AFNetworking/UIKit (= 3.1.0)
+  - AFNetworking/NSURLSession (3.1.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.1.0)
+  - AFNetworking/Security (3.1.0)
+  - AFNetworking/Serialization (3.1.0)
+  - AFNetworking/UIKit (3.1.0):
+    - AFNetworking/NSURLSession
+  - Crashlytics (3.8.2):
+    - Fabric (~> 1.6.3)
+  - CTFeedback (1.1.1)
+  - CWStatusBarNotification (2.3.5)
+  - DZNEmptyDataSet (1.8.1)
+  - EZSwiftExtensions (1.7)
+  - Fabric (1.6.9)
+  - IQKeyboardManagerSwift (4.0.6)
+  - iVersion (1.11.4)
+  - JFMinimalNotifications (0.0.7)
+  - MagicalRecord (2.3.2):
+    - MagicalRecord/Core (= 2.3.2)
+  - MagicalRecord/Core (2.3.2)
+  - ReachabilitySwift (3)
+  - Toaster (2.0.0)
+  - UIAlertView+Blocks (0.9)
+
+DEPENDENCIES:
+  - ActionSheetPicker-3.0
+  - AFNetworking
+  - Crashlytics
+  - CTFeedback
+  - CWStatusBarNotification
+  - DZNEmptyDataSet
+  - EZSwiftExtensions
+  - Fabric
+  - IQKeyboardManagerSwift
+  - iVersion
+  - JFMinimalNotifications
+  - MagicalRecord
+  - ReachabilitySwift
+  - Toaster
+  - UIAlertView+Blocks
+
+SPEC CHECKSUMS:
+  ActionSheetPicker-3.0: d11a4c12c6aaf704b8a3f56d179198c99f3e41e6
+  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  Crashlytics: 27acca95a01b042a8294291dd6dff27f8f6af6d7
+  CTFeedback: 6f128606e0d26d46075c3fa9fc33884372df8675
+  CWStatusBarNotification: 3d2738b25c3207f60cc50201388d3c96182545ff
+  DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
+  EZSwiftExtensions: 4afef248066a036903d8496bf07bc355b22ce766
+  Fabric: bc5bec42cef4bcf1ee3ce0e218fc518e4b44dfbb
+  IQKeyboardManagerSwift: b3015e819559ca76381f87a0833f44d178564603
+  iVersion: 2b6ffe708672cb494ba3cab150a94800c2892e81
+  JFMinimalNotifications: 6a879b44489bc58fa2bc17619ff7c5ddf2502856
+  MagicalRecord: 53bed74b4323b930992a725be713e53b37d19755
+  ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
+  Toaster: 25101e968655aa991fa72ad888029e8d515c6237
+  UIAlertView+Blocks: a46c99c5144f6c5dbc7d62fd2a0678daceec89a3
+
+PODFILE CHECKSUM: f2a62309eb912e940a1feec8b42bcba33376ca10
+
+COCOAPODS: 1.0.1
