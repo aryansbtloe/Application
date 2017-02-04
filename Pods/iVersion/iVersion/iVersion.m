@@ -1,7 +1,7 @@
 //
 //  iVersion.m
 //
-//  Version 1.11.4
+//  Version 1.11.5
 //
 //  Created by Nick Lockwood on 26/01/2011.
 //  Copyright 2011 Charcoal Design
@@ -33,11 +33,12 @@
 #import "iVersion.h"
 
 
-#pragma clang diagnostic ignored "-Wreceiver-is-weak"
 #pragma clang diagnostic ignored "-Warc-repeated-use-of-weak"
 #pragma clang diagnostic ignored "-Wobjc-missing-property-synthesis"
+#pragma clang diagnostic ignored "-Wpartial-availability"
 #pragma clang diagnostic ignored "-Wundeclared-selector"
 #pragma clang diagnostic ignored "-Wdirect-ivar-access"
+#pragma clang diagnostic ignored "-Wdouble-promotion"
 #pragma clang diagnostic ignored "-Wunused-macros"
 #pragma clang diagnostic ignored "-Wconversion"
 #pragma clang diagnostic ignored "-Wselector"
@@ -68,7 +69,7 @@ static NSString *const iVersionLastCheckedKey = @"iVersionLastChecked";
 static NSString *const iVersionLastRemindedKey = @"iVersionLastReminded";
 
 static NSString *const iVersionMacAppStoreBundleID = @"com.apple.appstore";
-static NSString *const iVersionAppLookupURLFormat = @"http://itunes.apple.com/%@/lookup";
+static NSString *const iVersionAppLookupURLFormat = @"https://itunes.apple.com/%@/lookup";
 
 static NSString *const iVersioniOSAppStoreURLFormat = @"itms-apps://itunes.apple.com/app/id%@";
 static NSString *const iVersionMacAppStoreURLFormat = @"macappstore://itunes.apple.com/app/id%@";
@@ -128,7 +129,7 @@ static NSString *const iVersionMacAppStoreURLFormat = @"macappstore://itunes.app
     static NSBundle *bundle = nil;
     if (bundle == nil)
     {
-        NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"iVersion" ofType:@"bundle"];
+        NSString *bundlePath = [[NSBundle bundleForClass:[iVersion class]] pathForResource:@"iVersion" ofType:@"bundle"];
         if (self.useAllAvailableLanguages)
         {
             bundle = [NSBundle bundleWithPath:bundlePath];
@@ -181,12 +182,16 @@ static NSString *const iVersionMacAppStoreURLFormat = @"macappstore://itunes.app
         {
             self.appStoreCountry = @"us";
         }
+        else if ([self.appStoreCountry isEqualToString:@"GI"])
+        {
+            self.appStoreCountry = @"GB";
+        }
         
         //application version (use short version preferentially)
         self.applicationVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
         if ([self.applicationVersion length] == 0)
         {
-            self.applicationVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey];
+            self.applicationVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:(__bridge NSString *)kCFBundleVersionKey];
         }
         
         //bundle id
@@ -451,11 +456,14 @@ static NSString *const iVersionMacAppStoreURLFormat = @"macappstore://itunes.app
 - (NSString *)URLEncodedString:(NSString *)string
 {
     CFStringRef stringRef = CFBridgingRetain(string);
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     CFStringRef encoded = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
                                                                   stringRef,
                                                                   NULL,
                                                                   CFSTR("!*'\"();:@&=+$,/?%#[]% "),
                                                                   kCFStringEncodingUTF8);
+#pragma clang diagnostic pop
     CFRelease(stringRef);
     return CFBridgingRelease(encoded);
 }
@@ -729,10 +737,14 @@ static NSString *const iVersionMacAppStoreURLFormat = @"macappstore://itunes.app
             
             NSError *error = nil;
             NSURLResponse *response = nil;
-            NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:iTunesServiceURL]
+            NSURL *url = [NSURL URLWithString:iTunesServiceURL];
+            NSURLRequest *request = [NSURLRequest requestWithURL:url
                                                      cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
                                                  timeoutInterval:REQUEST_TIMEOUT];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
             NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+#pragma clang diagnostic pop
             NSInteger statusCode = ((NSHTTPURLResponse *)response).statusCode;
             if (data && statusCode == 200)
             {
@@ -869,9 +881,13 @@ static NSString *const iVersionMacAppStoreURLFormat = @"macappstore://itunes.app
                         {
                             NSLog(@"iVersion will check %@ for %@", self.remoteVersionsPlistURL, self.appStoreID? @"release notes": @"a new app version");
                         }
-                        
-                        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.remoteVersionsPlistURL] cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:REQUEST_TIMEOUT];
+
+                        NSURL *url = [NSURL URLWithString:self.remoteVersionsPlistURL];
+                        NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:REQUEST_TIMEOUT];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
                         NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+#pragma clang diagnostic pop
                         if (data)
                         {
                             NSPropertyListFormat format;
@@ -1072,6 +1088,7 @@ static NSString *const iVersionMacAppStoreURLFormat = @"macappstore://itunes.app
     textView.textContainer.containerSize = NSMakeSize(contentSize.width, FLT_MAX);
     textView.textContainer.widthTracksTextView = YES;
     textView.string = details;
+    textView.editable = NO;
     scrollview.documentView = textView;
     [textView sizeToFit];
     
@@ -1093,7 +1110,7 @@ static NSString *const iVersionMacAppStoreURLFormat = @"macappstore://itunes.app
     
     if (![alert respondsToSelector:@selector(beginSheetModalForWindow:completionHandler:)])
     {
-        [alert beginSheetModalForWindow:[NSApplication sharedApplication].mainWindow
+        [alert beginSheetModalForWindow:(id __nonnull)[NSApplication sharedApplication].mainWindow
                           modalDelegate:self
                          didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
                             contextInfo:nil];
@@ -1103,7 +1120,7 @@ static NSString *const iVersionMacAppStoreURLFormat = @"macappstore://itunes.app
 #endif
     
     {
-        [alert beginSheetModalForWindow:[NSApplication sharedApplication].mainWindow completionHandler:^(NSModalResponse returnCode) {
+        [alert beginSheetModalForWindow:(id __nonnull)[NSApplication sharedApplication].mainWindow completionHandler:^(NSModalResponse returnCode) {
             [self didDismissAlert:alert withButtonAtIndex:returnCode - NSAlertFirstButtonReturn];
         }];
     }
@@ -1271,7 +1288,7 @@ static NSString *const iVersionMacAppStoreURLFormat = @"macappstore://itunes.app
             if ([view isKindOfClass:[UILabel class]])
             {
                 UILabel *label = (UILabel *)view;
-                if ([label.text isEqualToString:alertView.message])
+                if ([label.text isEqual:alertView.message])
                 {
                     label.lineBreakMode = NSLineBreakByWordWrapping;
                     label.numberOfLines = 0;

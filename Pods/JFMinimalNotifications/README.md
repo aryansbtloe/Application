@@ -3,6 +3,12 @@ JFMinimalNotification
 
 This is an iOS UIView for presenting a beautiful notification that is highly configurable and works for both iPhone and iPad. JFMinimalNotification is only available in ARC and targets iOS 7.0+.
 
+[![CocoaPods](https://img.shields.io/cocoapods/v/JFMinimalNotifications.svg)](https://cocoapods.org/pods/JFMinimalNotifications)
+[![CocoaPods](https://img.shields.io/cocoapods/dt/JFMinimalNotifications.svg)](https://cocoapods.org/pods/JFMinimalNotifications) 
+[![CocoaPods](https://img.shields.io/cocoapods/at/JFMinimalNotifications.svg)](https://cocoapods.org/pods/JFMinimalNotifications)
+[![CocoaPods](https://img.shields.io/cocoapods/l/JFMinimalNotifications.svg?maxAge=2592000)]() 
+[![CocoaPods](https://img.shields.io/cocoapods/p/JFMinimalNotifications.svg?maxAge=2592000)]()
+
 Looking for an Android version? Garrett Franks created one and it's awesome, check it out: [https://github.com/gfranks/GFMinimalNotifications](https://github.com/gfranks/GFMinimalNotifications)
 
 What It Looks Like:
@@ -14,11 +20,24 @@ See a short video of this control here: [https://www.youtube.com/watch?v=jDYC-NY
 
 ### Screen Shots
 
-![Examples](http://imageshack.com/a/img673/9547/7auGJk.png)
+![Examples](https://dl.dropboxusercontent.com/u/55388810/JFMinimalNotificationExample.jpeg)
 <!-- ![Success With Left View](https://imageshack.us/a/img713/7325/screenshot20130508at125.png)
 ![Success](https://imageshack.us/a/img560/7325/screenshot20130508at125.png)
 ![Error](https://imageshack.us/a/img43/7325/screenshot20130508at125.png)
 ![Default](https://imageshack.us/a/img856/7325/screenshot20130508at125.png)  -->
+
+Installation:
+------------
+
+### CocoaPods
+
+`pod 'JFMinimalNotifications', '~> 0.0.8'`
+
+### Directly include source into your projects
+
+- Simply copy the source files from the "JFMinimalNotification" folder into your project.
+- In your application's project app target settings, find the "Build Phases" section and open the "Link Binary With Libraries" block and click the "+" button and select the "CoreGraphics.framework".
+
 
 How To Use It:
 -------------
@@ -33,9 +52,7 @@ How To Use It:
     /**
      * Create the notification
      */
-    self.minimalNotification = [JFMinimalNotification notificationWithStyle:JFMinimalNotificationStyleDefault
-                                                                      title:@"This is my awesome title"
-                                                                   subTitle:@"This is my awesome sub-title"];
+    self.minimalNotification = [JFMinimalNotification notificationWithStyle:JFMinimalNotificationStyleDefault title:@"This is my awesome title" subTitle:@"This is my awesome sub-title"];
     
     /**
      * Set the desired font for the title and sub-title labels
@@ -98,7 +115,22 @@ typedef NS_ENUM(NSInteger, JFMinimalNotificationStyle) {
     JFMinimalNotificationStyleError,
     JFMinimalNotificationStyleSuccess,
     JFMinimalNotificationStyleInfo,
-    JFMinimalNotificationStyleWarning
+    JFMinimalNotificationStyleWarning,
+    
+    /**
+     * @return Used to get a title and subtitle, no accessory views, and white bg with black label text. Use the .bakgroundColor property on the notification to set the desired background color and .textColor property on the titleLabel and subTitleLabel UILabel's to change text color.
+     */
+    JFMinimalNotificationStyleCustom,
+    
+    /**
+     * @return A dark blur with vibrancy effect in the bakground with white label text.
+     */
+    JFMinimalNotificationStyleBlurDark,
+    
+    /**
+     * @return A light blur with vibrancy effect in the bakground with black label text.
+     */
+    JFMinimalNotificationStyleBlurLight
 };
 ```
 
@@ -111,19 +143,7 @@ Delegate Methods:
     - (void)minimalNotificationDidShowNotification:(JFMinimalNotification*)notification;
     - (void)minimalNotificationWillDisimissNotification:(JFMinimalNotification*)notification;
     - (void)minimalNotificationDidDismissNotification:(JFMinimalNotification*)notification;
-    
-Installation:
-------------
-
-### Cocoapods
-
-`pod 'JFMinimalNotifications', '~> 0.0.6'`
-
-### Directly include source into your projects
-
-- Simply copy the source files from the "JFMinimalNotification" folder into your project.
-- In your application's project app target settings, find the "Build Phases" section and open the "Link Binary With Libraries" block and click the "+" button and select the "CoreGraphics.framework".
-
+   
 License
 -------
 Copyright (c) 2012 Jeremy Fox ([jeremyfox.me](http://www.jeremyfox.me)). All rights reserved.

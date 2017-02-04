@@ -15,21 +15,21 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
-  - Crashlytics (3.8.2):
+  - Crashlytics (3.8.3):
     - Fabric (~> 1.6.3)
   - CTFeedback (1.1.1)
   - CWStatusBarNotification (2.3.5)
   - DZNEmptyDataSet (1.8.1)
-  - EZSwiftExtensions (1.7)
-  - Fabric (1.6.9)
-  - IQKeyboardManagerSwift (4.0.6)
-  - iVersion (1.11.4)
-  - JFMinimalNotifications (0.0.7)
+  - EZSwiftExtensions (1.8)
+  - Fabric (1.6.11)
+  - IQKeyboardManagerSwift (4.0.8)
+  - iVersion (1.11.5)
+  - JFMinimalNotifications (0.0.9)
   - MagicalRecord (2.3.2):
     - MagicalRecord/Core (= 2.3.2)
   - MagicalRecord/Core (2.3.2)
   - ReachabilitySwift (3)
-  - Toaster (2.0.0)
+  - Toaster (2.0.1)
   - UIAlertView+Blocks (0.9)
 
 DEPENDENCIES:
@@ -52,20 +52,20 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: d11a4c12c6aaf704b8a3f56d179198c99f3e41e6
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  Crashlytics: 27acca95a01b042a8294291dd6dff27f8f6af6d7
+  Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
   CTFeedback: 6f128606e0d26d46075c3fa9fc33884372df8675
   CWStatusBarNotification: 3d2738b25c3207f60cc50201388d3c96182545ff
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
-  EZSwiftExtensions: 4afef248066a036903d8496bf07bc355b22ce766
-  Fabric: bc5bec42cef4bcf1ee3ce0e218fc518e4b44dfbb
-  IQKeyboardManagerSwift: b3015e819559ca76381f87a0833f44d178564603
-  iVersion: 2b6ffe708672cb494ba3cab150a94800c2892e81
-  JFMinimalNotifications: 6a879b44489bc58fa2bc17619ff7c5ddf2502856
+  EZSwiftExtensions: b58e0fe7702e30c4f01bd039658fe84b4fdf5bd5
+  Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
+  IQKeyboardManagerSwift: c04bc9f68473823f825eb44d958fce98d921bead
+  iVersion: 3a93a89259eb3b52b0a8ba52c46a0027fa6b4d30
+  JFMinimalNotifications: b0c64f1237d8571f8e091b51530ffb9d8d7dcb76
   MagicalRecord: 53bed74b4323b930992a725be713e53b37d19755
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
-  Toaster: 25101e968655aa991fa72ad888029e8d515c6237
+  Toaster: be65cd48e93a525b2a9cc4bd25a2bfc900e02d9f
   UIAlertView+Blocks: a46c99c5144f6c5dbc7d62fd2a0678daceec89a3
 
 PODFILE CHECKSUM: f2a62309eb912e940a1feec8b42bcba33376ca10
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.1.1
